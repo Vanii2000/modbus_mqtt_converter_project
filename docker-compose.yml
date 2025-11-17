@@ -31,7 +31,8 @@ services:
       - "1883:1883"  # MQTT
       - "9001:9001"  # WebSocket
     volumes:
-      - ./mqtt-explorer/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      #- ./mqtt-explorer/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf    
     networks:
       - modbus-mqtt-net
 
