@@ -1,0 +1,40 @@
+# START DOCKER COMPOSE
+# docker compose up -d
+services:
+  python-modbus-simulation:
+    build: ./python-modbus-simulation
+    container_name: python-modbus-simulation
+    #working_dir: /app
+    command: python3 server.py
+    networks:
+      - modbus-mqtt-net
+    ports:
+      - "502:502" 
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    ports:
+      - "1880:1880"  # Node-RED UI
+    volumes:
+      - /home/tvanessza/iot_lab/node-red-data:/data
+    networks:
+      - modbus-mqtt-net
+    depends_on:
+      - python-modbus-simulation
+      - mqtt-broker
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"  # MQTT
+      - "9001:9001"  # WebSocket
+    volumes:
+      - ./mqtt-explorer/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - modbus-mqtt-net
+
+networks:
+  modbus-mqtt-net:
+    driver: bridge
