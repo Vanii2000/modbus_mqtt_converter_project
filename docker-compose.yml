@@ -4,7 +4,6 @@ services:
   python-modbus-simulation:
     build: ./python-modbus-simulation
     container_name: python-modbus-simulation
-    #working_dir: /app
     command: python3 server.py
     networks:
       - modbus-mqtt-net
@@ -17,7 +16,7 @@ services:
     ports:
       - "1880:1880"  # Node-RED UI
     volumes:
-      - /home/tvanessza/iot_lab/node-red-data:/data
+      - ./node-red-data:/data
     networks:
       - modbus-mqtt-net
     depends_on:
@@ -31,7 +30,6 @@ services:
       - "1883:1883"  # MQTT
       - "9001:9001"  # WebSocket
     volumes:
-      #- ./mqtt-explorer/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf    
     networks:
       - modbus-mqtt-net
