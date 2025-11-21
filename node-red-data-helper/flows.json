@@ -39,45 +39,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "cc58a9d9903a1c71",
-        "type": "modbus-client",
-        "name": "Modbus TCP Server",
-        "clienttype": "tcp",
-        "bufferCommands": true,
-        "stateLogEnabled": false,
-        "queueLogEnabled": false,
-        "failureLogEnabled": true,
-        "tcpHost": "python-modbus-simulation",
-        "tcpPort": 502,
-        "tcpType": "DEFAULT",
-        "serialPort": "/dev/ttyUSB",
-        "serialType": "RTU-BUFFERD",
-        "serialBaudrate": 9600,
-        "serialDatabits": 8,
-        "serialStopbits": 1,
-        "serialParity": "none",
-        "serialConnectionDelay": 100,
-        "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": 1,
-        "commandDelay": 1,
-        "clientTimeout": 1000,
-        "reconnectOnTimeout": true,
-        "reconnectTimeout": 2000,
-        "parallelUnitIdsAllowed": true,
-        "showErrors": false,
-        "showWarnings": true,
-        "showLogs": true
-    },
-    {
-        "id": "eced995786eb957a",
-        "type": "modbustcp-server",
-        "name": "ModbusTCPServer",
-        "host": "python-modbus-simulation",
-        "port": 502,
-        "unit_id": 1,
-        "reconnecttimeout": ""
-    },
-    {
         "id": "c015ce0f8fb8a995",
         "type": "mqtt-broker",
         "name": "Mosquitto",
@@ -109,33 +70,19 @@
         "sessionExpiry": ""
     },
     {
-        "id": "275f2703e015244c",
-        "type": "modbustcp-read",
-        "z": "b8ff6b3eb8881b12",
+        "id": "eced995786eb957a",
+        "type": "modbustcp-server",
         "name": "ModbusTCPServer",
-        "topic": "Topic",
-        "dataType": "HoldingRegister",
-        "adr": "0",
-        "quantity": "4",
-        "rate": "1",
-        "rateUnit": "s",
-        "server": "eced995786eb957a",
-        "ieeeType": "off",
-        "ieeeBE": true,
-        "x": 390,
-        "y": 340,
-        "wires": [
-            [
-                "5955655738620ba2",
-                "ef70f7dfd6bfb5d9"
-            ]
-        ]
+        "host": "python-modbus-simulation",
+        "port": 502,
+        "unit_id": 1,
+        "reconnecttimeout": ""
     },
     {
         "id": "5955655738620ba2",
         "type": "debug",
         "z": "b8ff6b3eb8881b12",
-        "name": "debug 1",
+        "name": "Write register value to console",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -144,38 +91,9 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
-        "y": 400,
+        "x": 710,
+        "y": 440,
         "wires": []
-    },
-    {
-        "id": "79516beb638c7e6b",
-        "type": "inject",
-        "z": "b8ff6b3eb8881b12",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 340,
-        "wires": [
-            [
-                "275f2703e015244c"
-            ]
-        ]
     },
     {
         "id": "9c9bd1b854fb986f",
@@ -212,6 +130,29 @@
         "wires": [
             [
                 "9c9bd1b854fb986f"
+            ]
+        ]
+    },
+    {
+        "id": "275f2703e015244c",
+        "type": "modbustcp-read",
+        "z": "b8ff6b3eb8881b12",
+        "name": "ModbusTCPServer",
+        "topic": "Topic",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "4",
+        "rate": "1",
+        "rateUnit": "s",
+        "server": "eced995786eb957a",
+        "ieeeType": "off",
+        "ieeeBE": true,
+        "x": 390,
+        "y": 340,
+        "wires": [
+            [
+                "5955655738620ba2",
+                "ef70f7dfd6bfb5d9"
             ]
         ]
     }
